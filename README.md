@@ -1,4 +1,4 @@
-# WiFi Maxxer — root edition
+# WiFi Maxxer
 
 Native Android app in Kotlin and Jetpack Compose Material 3. Android 10+, with superuser access through `su` for all tuning.
 
