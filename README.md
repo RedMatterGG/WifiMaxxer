@@ -15,9 +15,9 @@ If your manager uses custom app profiles, WiFi Maxxer needs UID 0 and permission
 - Actual Wi-Fi connection details and framework-reported hardware capabilities.
 - A simple **Gaming** toggle: on applies the global framework low-latency override; off returns it to automatic mode. No game detection, app list or usage-access permission.
 - **Foreground service** is optional and off by default. With it off, applying the profile is a one-shot root command. Closing the app does not restore the profile, and no background process is required.
-- With the service on, a notification provides Restore, Wi-Fi disconnection ends the session, and a root watchdog restores automatic behavior after 45 seconds without a heartbeat. Each watchdog Wi-Fi command has an 8-second timeout. Restore the active profile before changing the service option.
+- With the service on, a notification provides Restore, Wi-Fi disconnection ends the session, and a root watchdog restores automatic behavior after 45 seconds . Each watchdog Wi-Fi command has an 8-second timeout. Restore the active profile before changing the service option.
 - Recovery state is saved before applying. Failed commands trigger a restore attempt, and unresolved recovery remains visible. Successful one-shot applications are remembered for the current boot without automatically restoring them when the app reopens.
-- Ten gateway ICMP probes bound to the Wi-Fi interface, average/p95 latency, successive-sample jitter, packet loss, and a session baseline.
+- Ten gateway ICMP probes bound to the Wi-Fi interface, average/p95 latency, successive-sample jitter, packet loss, and a session baseline.⚠️⚠️⚠️ (not working atm)
 - Session activity and user-initiated diagnostic export.
 
 No telemetry or remote backend. Location permission is optional; Android may hide SSID without precise permission and enabled location services. Link speed is not internet throughput. A router blocking ICMP produces missing replies, not proof of a broken connection.
