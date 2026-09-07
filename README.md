@@ -47,20 +47,7 @@ Open this directory in Android Studio, select its bundled JDK, and install Andro
 
 The debug APK is `app/build/outputs/apk/debug/app-debug.apk`.
 
-Material 3 currently uses the alpha version already installed in this environment; validate UI behavior before production distribution.
-
-## On-device checks
-
-1. Install the debug APK and connect to Wi-Fi. Verify connection data; deny then grant location permission and check graceful handling.
-2. Grant root access. Deny it once and verify the error is visible. A firmware without the low-latency command must reject tuning.
-3. Run a gateway test, save a baseline, select Gaming, and retest. Do not infer a speed gain from one run.
-4. With the service off, close and reopen the app: Gaming should remain selected in the same boot. Switch it off and verify Restore succeeds. Reboot: the app must not reapply it.
-5. With the service on, switch to a game, restore from the notification, then test Wi-Fi disconnection and process termination. Recovery failure must remain visible if root is revoked.
-6. Export the report through the system share sheet.
-
-Build, unit tests and lint are run locally. Tests cover separate root/feature detection, executable fallback, denied access, command responses and the actual watchdog script with mocked device commands in Bash, including commands omitted from help. Git Bash on Windows or `/bin/bash` on Linux is required for these script tests.
-
-Version 0.2.1 was tested on the connected Xiaomi 24069PC21G (`peridot`) running Android 16: the app obtained UID 0 through `/system/bin/su`, recognized a low-latency command omitted from help, applied Gaming and restored automatic behavior successfully. The optional foreground service also reached its active state and stopped successfully after Restore. Both toggles were returned to off after testing. This validates command execution, not a measured latency or throughput gain, and is not a test of every root manager.
+Version 0.2.1 was tested on a Xiaomi 24069PC21G (peridot).
 
 ## Platform references
 
