@@ -20,6 +20,15 @@ If your manager uses custom app profiles, WiFi Maxxer needs UID 0 and permission
 - Ten gateway ICMP probes bound to the Wi-Fi interface, average/p95 latency, successive-sample jitter, packet loss, and a session baseline.⚠️ (not working atm)
 - Session activity and user-initiated diagnostic export.
 
+## To do 
+More comprehensive tweaking options.
+Multiple default profiles.
+Custom profile.
+Better in app benchmarking for fast testing.
+Possibly trying to make some of the future features work using adb(shizuku) without the need of root.
+Info of how each tweak affects battery life,network performance,cpu usage.
+
+
 ## Current boundaries
 
 Install the APK, connect to Wi-Fi, tap **Grant root access**, and approve the request in your installed root manager. Leave **Foreground service** off for apply-and-leave behavior, or turn it on before enabling Gaming for watchdog protection. Manual Restore and benchmarks work in either mode. Notifications are needed only for the optional service's visible notification controls.
