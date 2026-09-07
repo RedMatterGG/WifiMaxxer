@@ -20,8 +20,6 @@ If your manager uses custom app profiles, WiFi Maxxer needs UID 0 and permission
 - Ten gateway ICMP probes bound to the Wi-Fi interface, average/p95 latency, successive-sample jitter, packet loss, and a session baseline.⚠️⚠️⚠️ (not working atm)
 - Session activity and user-initiated diagnostic export.
 
-No telemetry or remote backend. Location permission is optional; Android may hide SSID without precise permission and enabled location services. Link speed is not internet throughput. A router blocking ICMP produces missing replies, not proof of a broken connection.
-
 ## Current boundaries
 
 Install the APK, connect to Wi-Fi, tap **Grant root access**, and approve the request in your installed root manager. Leave **Foreground service** off for apply-and-leave behavior, or turn it on before enabling Gaming for watchdog protection. Manual Restore and benchmarks work in either mode. Notifications are needed only for the optional service's visible notification controls.
