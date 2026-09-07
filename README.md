@@ -21,12 +21,12 @@ If your manager uses custom app profiles, WiFi Maxxer needs UID 0 and permission
 - Session activity and user-initiated diagnostic export.
 
 ## To do 
-More comprehensive tweaking options.
-Multiple default profiles.
-Custom profile.
-Better in app benchmarking for fast testing.
-Possibly trying to make some of the future features work using adb(shizuku) without the need of root.
-Info of how each tweak affects battery life,network performance,cpu usage.
+- More comprehensive tweaking options.
+- Multiple default profiles.
+- Custom profile.
+- Better in app benchmarking for fast testing.
+- Possibly trying to make some of the future features work using adb(shizuku) without the need of root.
+- Info of how each tweak affects battery life,network performance,cpu usage.
 
 
 ## Current boundaries
