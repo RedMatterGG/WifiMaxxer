@@ -11,5 +11,9 @@ class PingTest {
         assertEquals(4.0, result.p95!!, .001)
         assertEquals(2.5, result.jitter!!, .001)
         assertNull(parsePing("100% packet loss", 10).average)
+        assertEquals(100.0, parsePing("10 packets transmitted, 0 received, 100% packet loss", 10).loss, .001)
+        val partial = parsePing("64 bytes time=2 ms\n2 packets transmitted, 1 received", 10)
+        assertEquals(2, partial.sent)
+        assertEquals(50.0, partial.loss, .001)
     }
 }

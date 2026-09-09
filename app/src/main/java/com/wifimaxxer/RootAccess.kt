@@ -4,6 +4,7 @@ import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 import java.io.IOException
+import java.io.InputStream
 
 data class RootResult(val code: Int, val output: String, val error: String = "") {
     fun checkedEmpty() { check(checked().trim().lowercase() in setOf("", "success", "ok")) { "Unexpected firmware response: ${output.take(250)}" } }
@@ -47,7 +48,7 @@ object RootAccess {
         val process = SuLauncher.launch(command)
         val output = StringBuffer()
         val error = StringBuffer()
-        fun drain(stream: java.io.InputStream, buffer: StringBuffer) = thread(isDaemon = true, name = "root-output") {
+        fun drain(stream: InputStream, buffer: StringBuffer) = thread(isDaemon = true, name = "root-output") {
             runCatching { stream.bufferedReader().useLines { lines -> lines.forEach { if (buffer.length < 64_000) buffer.appendLine(it) } } }
         }
         val reader = drain(process.inputStream, output)
@@ -120,7 +121,7 @@ class RootLease internal constructor(private val command: List<String>? = null) 
             } }
             messages.offer("CLOSED")
         }
-        check(messages.poll(60, TimeUnit.SECONDS) == "READY") { "Root watchdog could not start; no profile was requested. $diagnostics" }
+        check(messages.poll(60, TimeUnit.SECONDS) == "READY") { "Root watchdog could not start; WLL was not requested. $diagnostics" }
     }
 
     @Synchronized fun send(message: String) {

@@ -6,11 +6,22 @@ android {
         applicationId = "com.wifimaxxer"
         minSdk = 29
         targetSdk = 37
-        versionCode = 3
-        versionName = "0.2.1"
+        versionCode = 18
+        versionName = "0.13.0"
     }
     buildFeatures { compose = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 }
 dependencies {
     implementation("androidx.activity:activity-compose:1.13.0")
