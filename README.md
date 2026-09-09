@@ -96,7 +96,10 @@ The Activity tab is a terminal-style view of `files/logs/wifi-maxxer.log`. Every
 
 Open the project in Android Studio, select JDK 17, and install Android SDK 37.
 
-Version 0.13.0 adds the complete Origami Kernel Manager network sysctl menu with value guidance and exact-value recovery. Version 0.12.0 replaced the temporary activity cards with a timestamped persistent terminal log and file viewer. Version 0.11.0 added independent mobile-data download and upload limits alongside the Wi-Fi controls. Functional checks do not claim a performance improvement.
+## Version 0.13.0
+Adds the complete Origami Kernel Manager network sysctl menu with value guidance and exact-value recovery. 
+Version 0.12.0 replaced the temporary activity cards with a timestamped persistent terminal log and file viewer. 
+Version 0.11.0 added independent mobile-data download and upload limits alongside the Wi-Fi controls.
 
 ## Primary references
 
