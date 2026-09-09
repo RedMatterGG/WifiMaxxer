@@ -78,11 +78,9 @@ WiFi Maxxer does not apply fixed `tcp_rmem`, `tcp_wmem`, socket maximum, `netdev
 
 Android 14+ supports Wi-Fi 7 MLO network selection and exposes vendor MLO policies for default, low latency, high throughput, and low power. The MLO setter is a privileged system API and is not exposed as a portable `cmd wifi` command. WiFi Maxxer therefore reports Wi-Fi 7, TID-to-link mapping, dual-band simultaneous operation, make-before-break roaming, preferred-network offload, WPA3, OWE, and TDLS capabilities without pretending it can safely force them.
 
-Qualcomm FastConnect, MediaTek Dimensity, and Broadcom mobile Wi-Fi 7 products advertise combinations of MLO, wide channels, multi-band concurrency, MU-MIMO, OFDMA, and vendor power/latency algorithms. Those features depend on the access point, regulatory domain, antennas, firmware, and vendor HAL. Public vendor material does not define one cross-chip root setting for them, so the app leaves those policies to Android and firmware.
-
 ## Qualcomm channel bonding
 
-The legacy WiFi Bonding module changes `gChannelBondingMode24GHz` and `gChannelBondingMode5GHz` in `WCNSS_qcom_cfg.ini`. These flags request wider channels; they do not combine two simultaneous band connections and are not Wi-Fi 7 MLO.
+The legacy WiFi Bonding module changes `gChannelBondingMode24GHz` and `gChannelBondingMode5GHz` in `WCNSS_qcom_cfg.ini`. These flags request wider channels.
 
 Channel bonding is classified **High risk / Persistent**. Before the first write, the app copies the complete detected file to `/data/adb/wifimaxxer/bonding/original.ini`, verifies it byte-for-byte, and records the original path, SHA-256 checksum, and ROM fingerprint. It refuses missing keys or ambiguous multiple-file results. Apply stages and validates the edit before copying it to the live file; a failed verification attempts rollback. Restore verifies the saved original and copies it back byte-for-byte. Both operations require a reboot before the driver reloads the file.
 
@@ -92,7 +90,7 @@ Direct editing works only when the rooted ROM permits the real partition to be w
 
 On the first usable launch after installation, the app captures readable Wi-Fi interface, cellular interface, CPU queue masks, global TCP, and Android Wi-Fi framework values. These immutable originals survive app starts, reboots, and updates. A ROM fingerprint or interface mismatch blocks writes so values from another driver session are not restored blindly.
 
-Every write is journaled before execution and readable results are checked afterward. Runtime journals expire when Android's boot count changes because the app never reapplies settings at boot. Android itself persists Wi-Fi verbose logging, so the app retains its recovery journal across reboot until the saved original level is restored. Qualcomm bonding is the separate direct-file persistence exception.
+Every write is journaled before execution and readable results are checked afterward. Runtime journals expire when Android's boot count changes because the app never reapplies settings at boot.
 
 ## Persistent activity log
 
@@ -100,13 +98,7 @@ The Activity tab is a terminal-style view of `files/logs/wifi-maxxer.log`. Every
 
 ## Build
 
-Open the project in Android Studio, select JDK 17, and install Android SDK 37. Or use:
-
-```powershell
-.\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug
-```
-
-The debug APK is `app/build/outputs/apk/debug/app-debug.apk`.
+Open the project in Android Studio, select JDK 17, and install Android SDK 37.
 
 Version 0.13.0 adds the complete Origami Kernel Manager network sysctl menu with value guidance and exact-value recovery. Version 0.12.0 replaced the temporary activity cards with a timestamped persistent terminal log and file viewer. Version 0.11.0 added independent mobile-data download and upload limits alongside the Wi-Fi controls. Functional checks do not claim a performance improvement.
 
