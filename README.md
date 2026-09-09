@@ -4,19 +4,15 @@ Native Android app in Kotlin and Jetpack Compose Material 3. Android 10+, with r
 
 ## Root compatibility
 
-The app uses the common `su -c` interface provided by Magisk, KernelSU, APatch, and compatible root managers. It does not detect manager package names, change SELinux policy, or use Shizuku/ADB as an in-app control path. Root is checked automatically when the app opens.
-
-The root check verifies an explicit UID 0 response separately from Wi-Fi command support. Some ROMs omit privileged commands from `cmd wifi help`, so the app also performs a read-only missing-argument check for the low-latency command. The Activity export includes bounded command diagnostics.
-
-KernelSU and similar managers can apply restricted root profiles. WiFi Maxxer needs UID 0 and access to Android's Wi-Fi service, the selected network interface, and the relevant `/proc/sys` files. The app respects a denied or restricted grant.
+App should support any root manager including Magisk, KernelSU, KernelSuNext APatch, i have only tested it on KernelSuNext.
 
 ## Overview
 
-- **WLL (Wi-Fi Low Latency)** replaces the former Gaming name. It invokes Android's framework low-latency override with root. Android documents lower latency as the goal, with possible reductions in throughput, scanning/roaming frequency, and battery life.
-- WLL is a direct toggle with no game detection. Off returns Android to automatic behavior.
+- **WLL (Wi-Fi Low Latency)** : It invokes Android's framework low-latency override with root. Android documents lower latency as the goal, with possible reductions in throughput, scanning/roaming frequency, and battery life.
+- WLL is a direct toggle. Off returns Android to automatic behavior.
 - The optional foreground service adds connection monitoring, a Restore notification, and a 45-second root watchdog. It is off by default and never reapplies WLL at boot.
 - Separate Wi-Fi and mobile-data sections each provide download and upload sliders. They add independent, reversible `tc` police filters to the selected interface. Their 5/1 Mbps floors match the FCC 4G LTE coverage baseline. Wi-Fi ceilings use Android's maximum supported RX/TX link speeds; mobile ceilings use Android's estimated first-hop downstream/upstream bandwidth.
-- Cloudflare and Jitter.is buttons open independent browser benchmarks and never change tuning settings.
+- Cloudflare and Jitter.is buttons open independent browser benchmarks. Cloudflare may ocassionally show very bad speed,it is normal, test it on other network speed tests and on actual download/upload operations for real world improvements.
 
 The bandwidth controls are intended to leave capacity for latency-sensitive traffic while a bulk transfer runs. Start around 85–90% of measured internet throughput; Android's reported maximum or estimate is only the slider ceiling and can differ from the actual bottleneck. Phone-side ingress policing cannot drain queues already built in an access point, carrier, or ISP, so router-side SQM remains more effective for Wi-Fi when available. Each target has its own Apply and Restore action. Limits are removed by Restore, reboot, or an interface reset.
 
